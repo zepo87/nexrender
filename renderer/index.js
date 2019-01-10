@@ -1,5 +1,5 @@
 'use strict';
-
+require('console-stamp')(console, { pattern: 'dd/mm/yyyy HH:MM:ss.l' });
 // can be overrided in test
 let api             = require('../api');
 
