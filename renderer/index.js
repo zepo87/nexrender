@@ -15,7 +15,7 @@ const cleanup       = require('./tasks/cleanup');
 
 const Project       = require('../api/models/project');
 
-const API_REQUEST_INTERVAL = process.env.API_REQUEST_INTERVAL || 15 * 60 * 1000; // 15 minutes
+const API_REQUEST_INTERVAL = process.env.API_REQUEST_INTERVAL || 60 * 1000; // 1 minute
 
 /**
  * Apply tasks one by one
@@ -111,7 +111,7 @@ function startRecursion() {
     requestNextProject().then((project) => {
         startRender(project).then(startRecursion).catch(startRecursion)
     }).catch(() => {
-        console.info('request failed or no suitable projects found. retrying in:', API_REQUEST_INTERVAL, 'msec');
+        console.info('request failed or no suitable projects found. retrying in:', API_REQUEST_INTERVAL / 1000, 'secs');
         setTimeout(() => { startRecursion() }, API_REQUEST_INTERVAL);
     });
 }
