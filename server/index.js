@@ -9,7 +9,7 @@ let app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(morgan('tiny'));
+app.use(morgan('common'));
 
 app.use('/api', router);
 
