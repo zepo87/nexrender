@@ -1,5 +1,7 @@
 'use strict';
 
+const result = require('dotenv').config();
+ 
 module.exports = {
     api:        require('./api'),
     Project:    require('./api/models/project'),
