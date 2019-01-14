@@ -36,8 +36,8 @@ module.exports = function(project) {
 
         // setup parameters
         params.push('-comp',        project.composition);
-        params.push('-project',     path.join( process.cwd(), project.workpath, project.template ));
-        params.push('-output',      path.join( process.cwd(), project.workpath, project.resultname ));
+        params.push('-project',     path.join(project.workpath, project.template ));
+        params.push('-output',      path.join(project.workpath, project.resultname ));
 
         // advanced parameters
         if (project.settings) {
