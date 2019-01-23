@@ -20,9 +20,9 @@ const API_REQUEST_INTERVAL = process.env.API_REQUEST_INTERVAL || 60 * 1000; // 1
 /**
  * Apply tasks one by one
  * Each task is applied only once, after previous is finished
- * @param  {Project} project 
+ * @param  {Project} project
  * @param  {Function} resolve
- * @param  {Function} reject 
+ * @param  {Function} reject
  */
 function applyTasks(project, resolve, reject) {
 
@@ -41,9 +41,7 @@ function applyTasks(project, resolve, reject) {
         .then(cleanup)
         .then((project) => {
 
-            console.info('----------------------------');
             console.info(`[${project.uid}] project finished`);
-            console.info('----------------------------\n');
 
             // project is finished
             project.finish().then(() => {
@@ -51,13 +49,8 @@ function applyTasks(project, resolve, reject) {
             });
         })
         .catch((err) => {
-
-            console.info('--------------------------');
-            console.info(`[${project.uid}] project failed`);
-            console.info('--------------------------\n');
-
-            console.info('Error message:', err.message || err);
-
+            console.error(`[${project.uid}] project failed`);
+            console.error('Error message:', err.message || err);
             // project encountered an error
             project.failure(err).then(() => {
                 reject(err, project);
@@ -111,7 +104,7 @@ function startRecursion() {
     requestNextProject().then((project) => {
         startRender(project).then(startRecursion).catch(startRecursion)
     }).catch(() => {
-        console.info('request failed or no suitable projects found. retrying in:', API_REQUEST_INTERVAL / 1000, 'secs');
+        console.warn('request failed or no suitable projects found. retrying in:', API_REQUEST_INTERVAL / 1000, 'secs');
         setTimeout(() => { startRecursion() }, API_REQUEST_INTERVAL);
     });
 }
@@ -121,10 +114,7 @@ function startRecursion() {
  * @param  {Object} opts Options object
  */
 function start(opts) {
-    console.info('=========[RENDERNODE]=========\n')
     console.info('nexrender.renderer is starting\n');
-    console.info('------------------------------');
-
     opts = opts || {};
 
     // configure api connection
@@ -159,7 +149,7 @@ module.exports = {
 
     /**
      * Local project model renderer method wrapper
-     * 
+     *
      * @param  {string} binary  path to Adobe After Effects aerender binary
      * @param  {Array} opts    optional options array
      * @param  {Project} project project model

@@ -24,21 +24,6 @@ cli.parse({
 
 
 cli.main(function(args, options) {
-
-// fancy logo
-console.log(`
-                                   | |          
- _ __   _____  ___ __ ___ _ __   __| | ___ _ __ 
-| '_ \\ / _ \\ \\/ / '__/ _ \\ '_ \\ / _\` |/ _ \\ '__|
-| | | |  __/>  <| | |  __/ | | | (_| |  __/ |   
-|_| |_|\\___/_/\\_\\_|  \\___|_| |_|\\__,_|\\___|_|   
-
-                  VERSION: ${nexrender.version} 
-
-For support and information, please visit:
-http://github.com/Inlife/nexrender
-`);
-
     if (options.version) {
         return console.log('nexrender version:', nexrender.version)
     }
